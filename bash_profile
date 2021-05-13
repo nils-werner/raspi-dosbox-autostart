@@ -5,4 +5,4 @@
 export SDL_VIDEODRIVER = 'fbcon'
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
-[[ "$(tty)" = "/dev/tty1" ]] && exec dosbox
+[[ "$(tty)" = "/dev/tty1" ]] && cd C && exec dosbox
