@@ -1,7 +1,8 @@
 post_install() {
   cat << EOF
 ==> Create user dosbox and setup auto-login
-useradd -m dosbox
+useradd -G video -s /bin/bash -d /home/dosbox dosbox
+chown -R dosbox:dosbox /home/dosbox
 systemctl daemon-reload
 systemctl disable --now getty@tty1
 systemctl enable --now dosbox-autologin@tty1

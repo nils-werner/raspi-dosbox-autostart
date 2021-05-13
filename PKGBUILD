@@ -6,8 +6,6 @@ arch=('any')
 url="https://github.com/nils-werner/arch-overlayroot"
 license=('MIT')
 depends=(
-  'sudo'
-  'patch'
   'dosbox'
 )
 install=dosbox-autostart.install
