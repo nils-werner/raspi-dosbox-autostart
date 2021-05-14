@@ -1,0 +1,11 @@
+[Unit]
+Description=DOSBox autostart content
+
+[Mount]
+What=/%I
+Where=/var/lib/dosbox-autostart/C
+Type=fat
+Options=defaults,uid=dosbox-autostart,gid=dosbox-autostart
+
+[Install]
+WantedBy=multi-user.target

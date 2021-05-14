@@ -1,9 +1,9 @@
 pkgname=dosbox-autostart
-pkgver=1.1
+pkgver=2.0
 pkgrel=1
 pkgdesc="Automatically boot into DOSBox"
 arch=('any')
-url="https://github.com/nils-werner/arch-overlayroot"
+url="https://github.com/nils-werner/raspi-dosbox-autostart"
 license=('MIT')
 depends=(
   'dosbox'
@@ -11,11 +11,13 @@ depends=(
 install=dosbox-autostart.install
 source=(
   'bash_profile'
-  'bashrc'
   'dosbox-autostart.install'
-  'autologin@.service'
+  'dosbox-autostart.sysusers'
+  'dosbox-autostart@.mount'
+  'dosbox-autostart.override'
 )
 sha256sums=(
+  'SKIP'
   'SKIP'
   'SKIP'
   'SKIP'
@@ -27,7 +29,8 @@ build() {
 }
 
 package() {
-  install -Dm644 "$srcdir/autologin@.service" "$pkgdir/etc/systemd/system/dosbox-autologin@.service"
-  install -Dm644 "$srcdir/bash_profile" "$pkgdir/home/dosbox/.bash_profile"
-  install -Dm644 "$srcdir/bashrc" "$pkgdir/home/dosbox/.bashrc"
+  install -Dm644 "bash_profile" "${pkgdir}/var/lib/${pkgname}/.bash_profile"
+  install -Dm644 "${pkgname}.sysusers" "${pkgdir}/usr/lib/sysusers.d/${pkgname}.conf"
+  install -Dm644 "${pkgname}.override" "${pkgdir}/usr/lib/systemd/system/getty@tty1.service.d/override.conf"
+  install -Dm644 "${pkgname}@.mount" -t "${pkgdir}/usr/lib/systemd/system"
 }

@@ -1,21 +1,15 @@
 post_install() {
   cat << EOF
-==> Create user dosbox and setup auto-login
-useradd -G video -s /bin/bash -d /home/dosbox dosbox
-chown -R dosbox:dosbox /home/dosbox
+==> Set up auto-login
 systemctl daemon-reload
-systemctl disable --now getty@tty1
-systemctl enable --now dosbox-autologin@tty1
+systemctl enable --now dosbox-autostart@dev-mmcblk0p3.mount
 EOF
 }
 
 post_remove() {
   cat << EOF
-==> Remove user dosbox
-killall -u dosbox
+==> Remove auto-login
 systemctl daemon-reload
-systemctl disable --now dosbox-autologin@tty1
-systemctl enable --now getty@tty1
-userdel -r dosbox
+systemctl disable --now dosbox-autostart@dev-mmcblk0p3.mount
 EOF
 }

@@ -1,0 +1,2 @@
+u dosbox-autostart - "DosBOX user" /var/lib/dosbox-autostart /bin/bash
+m dosbox-autostart video
